@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather</title>
+</head>
+<body>
+	<h1>Weather data</h1>
+	<ul>
+		{% if text %}
+			<li>Text : {{ text }}</li>
+		{% endif %}
+		{% if tempreture %}
+			<li>Tempreture : {{ tempreture }}</li>
+		{% endif %}
+		{% if sunrise %}
+			<li>Sunrise : {{ sunrise }}</li>
+		{% endif %}
+		{% if sunset %}
+			<li>Sunset : {{ sunset }}</li>
+		{% endif %}
+		{% if humadity %}
+			<li>Humadity : {{ humadity }}</li>
+		{% endif %}
+		{% if pressure %}
+			<li>Pressure : {{ pressure }}</li>
+		{% endif %}
+		{% if visibility %}
+			<li>Visibility : {{ visibility }}</li>
+		{% endif %}
+		{% if speed %}
+			<li>Speed : {{ speed }}</li>
+		{% endif %}
+		{% if direction %}
+			<li>Direction : {{ direction }}</li>
+		{% endif %}
+		{% if lat %}
+			<li>lat : {{ lat }}</li>
+		{% endif %}
+		{% if log %}
+			<li>long : {{ log }}</li>
+		{% endif %}
+
+
+	</ul>
+</body>
+</html>

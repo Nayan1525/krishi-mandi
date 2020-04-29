@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Variety list</title>
+</head>
+<body>
+	<h1>Varities</h1>
+	<ul>
+		{% for variety in variety %}
+            <a href="commodity_price/{{ variety.id }}">
+			    <li>{{ variety.variety_name }}</li> ------
+                <a href="compare_by_dates/{{ variety.commodity.market.market_name }}/{{ variety.commodity.commodity_name }}/{{ variety.variety_name }}">
+                    Compare By Date
+                </a>   -------
+                <a href="compare_by_markets/{{ variety.commodity.market.market_name }}/{{ variety.commodity.commodity_name }}/{{ variety.variety_name }}">
+                    Compare With Markets
+                </a>
+            </a>
+		{% endfor %}
+	</ul>
+	<span class="step-links">
+        {% if variety.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ variety.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ variety.number }} of {{ variety.paginator.num_pages }}.
+        </span>
+
+        {% if variety.has_next %}
+            <a href="?page={{ variety.next_page_number }}">next</a>
+            <a href="?page={{ variety.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+	</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+  <form method="GET" id="personForm" action="{% url 'graph' %}" novalidate>
+    {% csrf_token %}
+    <thead>
+  <tr>
+   {% for field in form %}
+   <th>{{ field.label }}:</th>
+     <th>{{ field}}</th>
+   {% endfor %}
+  </tr>
+</thead>
+<button class="btn btn-outline-info" type="submit">Load</button>
+
+  </form>
+  {% if lock %}
+  <div style="
+    position: relative;
+    padding-bottom: 10%;
+    height: 600px;
+    overflow:hidden;
+    ">
+    <iframe src="http://127.0.0.1:8000/django_plotly_dash/app/krishimandi/" style="
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    " frameborder="0"></iframe>
+  </div>
+  {% endif %}
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_state").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-districts/';  // get the url of the `load_cities` view
+      var state = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'state': state       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_district").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-markets/';  // get the url of the `load_cities` view
+      var district = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'district': district       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_market").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_market").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-commodities/';  // get the url of the `load_cities` view
+      var market = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'market': market       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_commodity").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_commodity").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-varieties/';  // get the url of the `load_cities` view
+      var commodity = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'commodity': commodity    // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_variety").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Districts list</title>
+</head>
+<body>
+	<h1>Districts</h1>
+	<ul>
+		{% for district in district %}
+			<a href="market/{{ district.id }}">
+    			<li>{{ district.district_name }}  </li>
+			</a>
+		{% endfor %}
+	</ul>
+	<div class="pagination">
+    <span class="step-links">
+        {% if district.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ district.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ district.number }} of {{ district.paginator.num_pages }}.
+        </span>
+
+        {% if district.has_next %}
+            <a href="?page={{ district.next_page_number }}">next</a>
+            <a href="?page={{ district.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+	</span>
+	</div>
+
+</body>
+</html>

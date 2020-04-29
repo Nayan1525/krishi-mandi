@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for commodity in commodities %}
+<option value="{{ commodity.id }}">{{ commodity.commodity_name }}</option>
+{% endfor %}

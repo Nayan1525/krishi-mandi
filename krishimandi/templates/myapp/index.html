@@ -1,0 +1,339 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+	/*[ Block2 ]
+///////////////////////////////////////////////////////////
+*/
+.block2-labelpromotion::before,
+.block2-labelsale::before,
+.block2-labelnew::before 
+{
+  z-index: 100;
+  font-family: Montserrat-Regular;
+  font-size: 12px;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 22px;
+  border-radius: 11px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.block2-labelsale::before {
+  background-color: #e65540;
+  content: 'Sale';
+}
+
+.block2-labelnew::before {
+  background-color: #66a8a6;
+  content: 'New';
+}
+
+.block2-labelpromotion::before{
+	background-color: #000;
+	content: 'Promotion';
+	width: 70px;
+  }
+
+  .btn-dark {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-outline-dark {
+    color: #000;
+    border-color: #000;
+}
+
+
+</style>
+
+	<!-- Slide1 -->
+	<section class="slide1">
+		<div class="wrap-slick1">
+			<div class="slick1">
+				
+				
+				<div class="item-slick1 item2-slick1" style="background-image: url({% static '123.jpg' %});">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+					
+
+						<h2 class="caption2-slide1 xl-text1 t-center m-b-37" data-appear="lightSpeedIn">
+							You Can Get Deatails Of Weather
+						</h2>
+
+						<div class="wrap-btn-slide1 w-size1 " data-appear="slideInUp">
+							<!-- Button -->
+							<a href="{% url 'show_weather' %}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Get Now
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick1 item3-slick1" style="background-image: url({% static 'wallpaper.jpg' %});">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+						
+
+						<h2 class="caption2-slide1 xl-text1 t-center m-b-37" style='color:blue;' data-appear="rotateInUpRight">
+							You Can Check The Commodity Prices Here
+						</h2>
+
+						<div class="wrap-btn-slide1 w-size1" data-appear="rotateIn">
+							<!-- Button -->
+							<a href="{% url 'price' %}" style='color:blue;' class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Get Now
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- New Product -->
+	<section class="newproduct bgwhite p-t-0 p-b-0">
+		<div class="container">
+			<!-- Slide2 -->
+			<div class="wrap-slick2">
+				<div class="slick2">
+
+					{% for item in object_list %}
+					<div class="item-slick2 p-l-15 p-r-15">
+						<!-- Block2 -->
+						<div class="block2">
+							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-label{{item.get_label_display}}">
+								<img src="{{ item.image.url }}" alt="IMG-PRODUCT" 
+								style="height: 360px;">
+
+								<div class="block2-overlay trans-0-4">
+									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+									</a>
+	
+									<div class="block2-btn-addcart w-size1 trans-0-4">
+										<!-- Button -->
+										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+											Add to Cart
+										</button>
+									</div>
+								</div>
+							</div>
+							
+
+							<div class="block2-txt p-t-20">
+								<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+									{{ item.title }}
+								</a>
+
+								{% if item.discount_price %}
+								<span class="block2-oldprice m-text7 p-r-5">
+									${{ item.price }}
+								</span>
+
+								<span class="block2-newprice m-text8 p-r-5">
+									${{ item.discount_price }}
+								</span>
+								{% else %}
+								<span class="block2-price m-text6 p-r-5">
+									${{ item.price }}
+								</span>
+								{% endif %}
+								
+
+								
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+					
+				
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- Banner2 -->
+	<section class="banner2 bg5 p-t-55 p-b-55">
+		<div class="container">
+			<div class="row">
+<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="hov-img-zoom pos-relative">
+						<img src="{% static 'line.jpg' %}" alt="IMG-BANNER">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<span class="m-text9 p-t-45 fs-20-sm">
+								Compare By Dates
+							</span>
+							<span class="s-text4 p-t-45 fs-20-sm">
+								This functionality of our web shows statistical and graphical
+								information about commodity prices on various dates and compare it.
+								To use this functionality you have to signup and login.
+							</span>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="hov-img-zoom pos-relative">
+						<img src="{% static 'market.jpg' %}" alt="IMG-BANNER">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<span class="m-text9 p-t-45 fs-20-sm">
+								Compare By Markets
+							</span>
+							<span class="s-text4 p-t-45 fs-20-sm">
+								This functionality of our web shows statistical and graphical
+								information about commodity prices of various markets and compare it.
+								To use this functionality you have to signup and login.
+							</span>
+
+						</div>
+					</div>
+				</div>			</div>
+		</div>
+	</section>
+
+
+	<!-- Shipping -->
+	<section class="shipping bgwhite p-t-62 p-b-46">
+		<div class="flex-w p-l-15 p-r-15">
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+				<h4 class="m-text12 t-center">
+					Easy To Compare The Commodity Prices With Dates
+				</h4>
+
+				<a href="#" class="s-text11 t-center">
+					Login for more info
+				</a>
+			</div>
+
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 bo2 respon2">
+				<h4 class="m-text12 t-center">
+					Easy To Compare The Commodity Prices Between Markets
+				</h4>
+
+				<span class="s-text11 t-center">
+					Login for more info
+				</span>
+			</div>
+
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+				<h4 class="m-text12 t-center">
+					Create A Profile And Interect With Dealers And Farmers
+				</h4>
+
+				<span class="s-text11 t-center">
+					Login for interaction
+				</span>
+			</div>
+		</div>
+	</section>
+
+
+<!-- Footer -->
+<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+  <div class="flex-w p-b-90">
+    <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+      <h4 class="s-text12 p-b-30">
+        GET IN TOUCH
+      </h4>
+
+      <div>
+        <p class="s-text7 w-size27">
+          Any questions? Let us know in store at 1st floor, A-105 Aditya appartment, New
+          C.G. Roadm,Chandkheda,Ahmedabad 380019 or call us on (+91) 84691 84667
+        </p>
+
+        <div class="flex-m p-t-30">
+          <a href="#" class="topbar-social-item fab fa-facebook"></a>
+			<a href="#" class="topbar-social-item fab fa-instagram"></a>
+			<a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+			<a href="#" class="topbar-social-item fab fa-snapchat-ghost"></a>
+			<a href="#" class="topbar-social-item fab fa-youtube-play"></a>
+        </div>
+      </div>
+    </div>
+
+ 	<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+      <h4 class="s-text12 p-b-30">
+        About Us
+      </h4>
+
+      <div>
+        <p class="s-text7 w-size27">
+          Website solutions for statatical and graphical information of Mandi with authorised dealers.
+        </p>
+
+     
+      </div>
+    </div>
+
+    <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+      <h4 class="s-text12 p-b-30">
+        Newsletter
+      </h4>
+
+      <form>
+        <div class="effect1 w-size9">
+          <input
+            class="s-text7 bg6 w-full p-b-5"
+            type="text"
+            name="email"
+            placeholder="email@example.com"
+          />
+          <span class="effect1-line"></span>
+        </div>
+
+        <div class="w-size2 p-t-10">
+          <!-- Button -->
+          <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+            Subscribe
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+    <div class="t-center s-text8 p-t-20">
+      Copyright © 2020 All rights reserved. 
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+  <span class="symbol-btn-back-to-top">
+    <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+  </span>
+</div>
+
+<!-- Container Selection1 -->
+<div id="dropDownSelect1"></div>
+
+
+
+	
+
+	{% endblock content %}
+
+
+	

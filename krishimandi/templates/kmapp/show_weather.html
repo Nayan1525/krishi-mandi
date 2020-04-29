@@ -1,0 +1,123 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+  <form method="GET" id="personForm" action="{% url 'show_weather' %}" novalidate>
+    {% csrf_token %}
+    <thead>
+  <tr>
+   {% for field in form %}
+   <th>{{ field.label }}:</th>
+     <th>{{ field}}</th>
+   {% endfor %}
+  </tr>
+</thead>
+    <button class="btn btn-outline-info" type="submit">Load</button>
+  </form>
+  {% if lock %}
+    <h1>Weather data</h1>
+  <ul>
+    {% if text %}
+      <li>Text : {{ text }}</li>
+    {% endif %}
+    {% if tempreture %}
+      <li>Temperature : {{ tempreture }}</li>
+    {% endif %}
+    {% if sunrise %}
+      <li>Sunrise : {{ sunrise }}</li>
+    {% endif %}
+    {% if sunset %}
+      <li>Sunset : {{ sunset }}</li>
+    {% endif %}
+    {% if humadity %}
+      <li>Humadity : {{ humadity }}</li>
+    {% endif %}
+    {% if pressure %}
+      <li>Pressure : {{ pressure }}</li>
+    {% endif %}
+    {% if visibility %}
+      <li>Visibility : {{ visibility }}</li>
+    {% endif %}
+    {% if speed %}
+      <li>Speed : {{ speed }}</li>
+    {% endif %}
+    {% if direction %}
+      <li>Direction : {{ direction }}</li>
+    {% endif %}
+    {% if lat %}
+      <li>lat : {{ lat }}</li>
+    {% endif %}
+    {% if log %}
+      <li>long : {{ log }}</li>
+    {% endif %}
+
+
+  </ul>
+  {% endif %}
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_state").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-districts/';  // get the url of the `load_cities` view
+      var state = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'state': state       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_district").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-markets/';  // get the url of the `load_cities` view
+      var district = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'district': district       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_market").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_market").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-commodities/';  // get the url of the `load_cities` view
+      var market = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'market': market       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_commodity").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+     $("#id_commodity").change(function () {
+      var url = 'http://127.0.0.1:8000/kmapp/ajax/load-varieties/';  // get the url of the `load_cities` view
+      var commodity = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'commodity': commodity    // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_variety").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Market list</title>
+</head>
+<body>
+	<h1>Markets</h1>
+	<ul>
+        {% for market in market %}
+			<a href="commodity/{{ market.id }}">
+                <li>{{ market.market_name }}     ---||---      <a href="weather/{{ market.id }}">Weather</a>
+                </li>
+            </a>
+        {% endfor %}
+        </ul>
+	<div class="pagination">
+    <span class="step-links">
+        {% if market.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ market.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ market.number }} of {{ market.paginator.num_pages }}.
+        </span>
+
+        {% if market.has_next %}
+            <a href="?page={{ market.next_page_number }}">next</a>
+            <a href="?page={{ market.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+	</span>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Commodity list</title>
+</head>
+<body>
+	<h1>Commodities</h1>
+	<ul>
+
+		{% for commodity in commodity %}
+			<a href="variety/{{ commodity.id }}">
+            	<li>{{ commodity.commodity_name }}</li>
+			</a>
+		{% endfor %}
+	</ul>
+	<span class="step-links">
+        {% if commodity.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ commodity.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ commodity.number }} of {{ commodity.paginator.num_pages }}.
+        </span>
+
+        {% if commodity.has_next %}
+            <a href="?page={{ commodity.next_page_number }}">next</a>
+            <a href="?page={{ commodity.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+	</span>
+	</div>
+</body>
+</html>

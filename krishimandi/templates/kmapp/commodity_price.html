@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Price list</title>
+</head>
+<body>
+	<h1>Prices</h1>
+	<ul>
+        {% for commodity_price in commodity_price %}
+            <li>Arrival-Date: {{ commodity_price.arrival_date }}</li>
+            <li>Max-Price {{ commodity_price.max_price }}</li>
+            <li>Min-Price {{ commodity_price.min_price }}</li>
+        {% endfor %}
+	</ul>
+	<span class="step-links">
+        {% if commodity_price.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ commodity_price.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ commodity_price.number }} of {{ commodity_price.paginator.num_pages }}.
+        </span>
+
+        {% if variety.has_next %}
+            <a href="?page={{ commodity_price.next_page_number }}">next</a>
+            <a href="?page={{ commodity_price.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+	</span>
+	</div>
+</body>
+</html>

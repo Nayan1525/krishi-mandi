@@ -1,0 +1,67 @@
+{% extends 'myapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Price</h5>
+		</div>
+		<div class="card card-body">
+			<form method="GET">
+
+				{{ priceFilter.form | crispy }}
+				<button class="btn btn-primary" type="submit">Search</button>
+				
+			</form>
+		</div>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Date</th>
+					<th>Commodity</th>
+					<th>Variety</th>
+					<th>Market</th>
+					<th>District</th>
+					<th>State</th>
+					<th>Min Prize</th>
+					<th>Modal Prize</th>
+					<th>Max Prize</th>
+				</tr>
+				{% for price in prices %}
+				<tr>
+					<td>{{price.arrival_date}}</td>
+					<td>{{price.commodity}}</td>
+					<td>{{price.variety}}</td>
+					<td>{{price.market}}</td>
+					<td>{{price.district }}</td>
+					<td>{{price.state }}</td>
+					<td>{{price.min_price }}</td>
+					<td>{{price.max_price}}</td>
+					<td>{{price.modal_price}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if prices.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ prices.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ prices.number }} of {{ prices.paginator.num_pages }}.
+        </span>
+
+        {% if prices.has_next %}
+            <a href="?page={{ prices.next_page_number }}">next</a>
+            <a href="?page={{ prices.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

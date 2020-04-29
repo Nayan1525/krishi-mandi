@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>State list</title>
+</head>
+<body>
+	<h1>States</h1>
+	<ul>
+		{% for state in state %}
+    		<a href="district/{{ state.id }}">
+    			<li>{{ state.state_name }}</li>
+    		</a>
+		{% endfor %}
+	</ul>
+	<div class="pagination">
+    <span class="step-links">
+        {% if state.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ state.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ state.number }} of {{ state.paginator.num_pages }}.
+        </span>
+
+        {% if state.has_next %}
+            <a href="?page={{ state.next_page_number }}">next</a>
+            <a href="?page={{ state.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+</body>
+</html>
